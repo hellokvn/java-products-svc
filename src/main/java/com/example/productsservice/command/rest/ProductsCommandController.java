@@ -2,6 +2,8 @@ package com.example.productsservice.command.rest;
 
 import java.util.UUID;
 
+import javax.validation.Valid;
+
 import com.example.productsservice.command.CreateProductCommand;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -23,7 +25,7 @@ public class ProductsCommandController {
     }
 
     @PostMapping
-    public String createProduct(@RequestBody CreateProductRestModel createProductRestModel) {
+    public String createProduct(@Valid @RequestBody CreateProductRestModel createProductRestModel) {
 
         CreateProductCommand createProductCommand = CreateProductCommand.builder()
                 .price(createProductRestModel.getPrice())
