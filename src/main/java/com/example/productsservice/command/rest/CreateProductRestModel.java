@@ -1,4 +1,4 @@
-package com.example.productsservice.rest;
+package com.example.productsservice.command.rest;
 
 import java.math.BigDecimal;
 

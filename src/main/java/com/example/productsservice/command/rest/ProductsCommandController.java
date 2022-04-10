@@ -1,4 +1,4 @@
-package com.example.productsservice.rest;
+package com.example.productsservice.command.rest;
 
 import java.util.UUID;
 
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/products")
-public class ProductsController {
+public class ProductsCommandController {
 
     private final CommandGateway commandGateway;
 
     @Autowired
-    public ProductsController(CommandGateway commandGateway) {
+    public ProductsCommandController(CommandGateway commandGateway) {
         this.commandGateway = commandGateway;
     }
 
