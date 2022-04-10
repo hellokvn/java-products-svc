@@ -9,7 +9,6 @@ public class ProductsServiceEventsErrorHandler implements ListenerInvocationErro
 	@Override
 	public void onError(Exception exception, EventMessage<?> event, EventMessageHandler eventHandler) throws Exception {
 		throw exception;
-
 	}
 
 }

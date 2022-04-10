@@ -1,6 +1,7 @@
 package com.example.productsservice;
 
 import com.example.productsservice.command.interceptors.CreateProductCommandInterceptor;
+import com.example.productsservice.core.errorhandling.ProductsServiceEventsErrorHandler;
 
 import org.axonframework.commandhandling.CommandBus;
 import org.axonframework.config.EventProcessingConfigurer;
@@ -25,10 +26,10 @@ public class ProductsServiceApplication {
 		commandBus.registerDispatchInterceptor(context.getBean(CreateProductCommandInterceptor.class));
 	}
 
-	// @Autowired
-	// public void configure(EventProcessingConfigurer config) {
-	// config.registerListenerInvocationErrorHandler("product-group",
-	// conf -> new ProductsServiceEventsErrorHandler());
-	// }
+	@Autowired
+	public void configure(EventProcessingConfigurer config) {
+		config.registerListenerInvocationErrorHandler("product-group",
+				conf -> new ProductsServiceEventsErrorHandler());
+	}
 
 }
