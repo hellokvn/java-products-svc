@@ -1,5 +1,6 @@
 package com.example.productsservice.query;
 
+import com.example.core.events.ProductReservedEvent;
 import com.example.productsservice.core.data.ProductEntity;
 import com.example.productsservice.core.data.ProductsRepository;
 import com.example.productsservice.core.events.ProductCreatedEvent;
@@ -47,26 +48,21 @@ public class ProductEventsHandler {
         }
     }
 
-    // @EventHandler
-    // public void on(ProductReservedEvent productReservedEvent) {
-    // ProductEntity productEntity =
-    // productsRepository.findByProductId(productReservedEvent.getProductId());
+    @EventHandler
+    public void on(ProductReservedEvent productReservedEvent) {
+        ProductEntity productEntity = productsRepository.findByProductId(productReservedEvent.getProductId());
 
-    // LOGGER.debug("ProductReservedEvent: Current product quantity " +
-    // productEntity.getQuantity());
+        LOGGER.debug("ProductReservedEvent: Current product quantity " + productEntity.getQuantity());
 
-    // productEntity.setQuantity(productEntity.getQuantity() -
-    // productReservedEvent.getQuantity());
+        productEntity.setQuantity(productEntity.getQuantity() - productReservedEvent.getQuantity());
 
-    // productsRepository.save(productEntity);
+        productsRepository.save(productEntity);
 
-    // LOGGER.debug("ProductReservedEvent: New product quantity " +
-    // productEntity.getQuantity());
+        LOGGER.debug("ProductReservedEvent: New product quantity " + productEntity.getQuantity());
 
-    // LOGGER.info("ProductReservedEvent is called for productId:" +
-    // productReservedEvent.getProductId() +
-    // " and orderId: " + productReservedEvent.getOrderId());
-    // }
+        LOGGER.info("ProductReservedEvent is called for productId:" + productReservedEvent.getProductId()
+                + " and orderId: " + productReservedEvent.getOrderId());
+    }
 
     // @EventHandler
     // public void on(ProductReservationCancelledEvent
